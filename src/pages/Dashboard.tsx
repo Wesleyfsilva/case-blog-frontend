@@ -57,11 +57,12 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <div className="flex items-center justify-between mb-6">
+    <div className="min-h-screen bg-gray-100 px-6 py-8">
+      {/* Cabeçalho */}
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
         <div>
-          <h1 className="text-2xl font-bold">Olá, {nomeUsuario}!</h1>
-          <p className="text-sm text-gray-500">Seus artigos:</p>
+          <h1 className="text-3xl font-bold text-gray-800">Olá, {nomeUsuario}</h1>
+          <p className="text-gray-500">Aqui estão seus artigos</p>
         </div>
 
         <div className="flex gap-2">
@@ -80,39 +81,52 @@ export default function Dashboard() {
         </div>
       </div>
 
+      {/* Lista de artigos */}
       {artigos.length === 0 ? (
-        <p>Você ainda não publicou nenhum artigo.</p>
+        <p className="text-center text-gray-500">Você ainda não publicou nenhum artigo.</p>
       ) : (
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {artigos.map((artigo) => (
-            <div key={artigo.id} className="bg-white p-4 rounded shadow">
-              {artigo.imagem && (
-                <img
-                  src={`http://localhost:3000/uploads/${artigo.imagem}`}
-                  alt={artigo.titulo}
-                  className="w-full h-40 object-cover rounded mb-2"
-                />
-              )}
-              <h2 className="text-lg font-semibold">{artigo.titulo}</h2>
-              <p className="text-sm text-gray-500 mb-2">
-                Publicado em {new Date(artigo.criado_em).toLocaleDateString()}
-              </p>
-
-              <div className="flex justify-between">
-                <button
-                  onClick={() => navigate(`/editar-artigo/${artigo.id}`)}
-                  className="text-blue-600 hover:underline"
-                >
-                  Editar
-                </button>
-                <button
-                  onClick={() => handleExcluir(artigo.id)}
-                  className="text-red-600 hover:underline"
-                >
-                  Excluir
-                </button>
-              </div>
-            </div>
+         <div
+         key={artigo.id}
+         className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col hover:shadow-md transition"
+       >
+         {artigo.imagem && (
+           <img
+             src={`http://localhost:3000/uploads/${artigo.imagem}`}
+             alt={artigo.titulo}
+             className="w-full h-40 object-cover"
+           />
+         )}
+       
+         <div className="p-4 flex flex-col flex-1 justify-between">
+           <div className="mb-2">
+             <h2 className="text-lg font-semibold text-gray-800">{artigo.titulo}</h2>
+             <p className="text-sm text-gray-600 mb-2">
+               Publicado em {new Date(artigo.criado_em).toLocaleDateString()}
+             </p>
+             <p className="text-sm text-gray-700 line-clamp-2">
+               {artigo.conteudo.slice(0, 100)}...
+             </p>
+           </div>
+       
+           <div className="flex justify-between mt-auto pt-2 border-t border-gray-100">
+             <button
+               onClick={() => navigate(`/editar-artigo/${artigo.id}`)}
+               className="text-blue-600 hover:underline text-sm"
+             >
+               Editar
+             </button>
+             <button
+               onClick={() => handleExcluir(artigo.id)}
+               className="text-red-600 hover:underline text-sm"
+             >
+               Excluir
+             </button>
+           </div>
+         </div>
+       </div>
+       
           ))}
         </div>
       )}
