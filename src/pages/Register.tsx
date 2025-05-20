@@ -24,42 +24,67 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <form onSubmit={handleRegister} className="bg-white p-6 rounded shadow-md w-full max-w-sm">
-        <h1 className="text-2xl font-bold mb-4">Cadastro</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-700 px-4">
+      <form
+        onSubmit={handleRegister}
+        className="bg-white w-full max-w-md p-8 rounded-xl shadow-lg space-y-5"
+      >
+        <h1 className="text-3xl font-bold text-center text-gray-800">Criar conta</h1>
 
-        {erro && <p className="text-red-500 text-sm mb-2">{erro}</p>}
+        {erro && <p className="text-red-600 text-sm text-center">{erro}</p>}
 
-        <input
-          type="text"
-          placeholder="Nome"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-          className="w-full border p-2 mb-3 rounded"
-        />
+        <div>
+          <label className="block mb-1 text-sm text-gray-600">Nome</label>
+          <input
+            type="text"
+            placeholder="Seu nome"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
 
-        <input
-          type="email"
-          placeholder="E-mail"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full border p-2 mb-3 rounded"
-        />
+        <div>
+          <label className="block mb-1 text-sm text-gray-600">E-mail</label>
+          <input
+            type="email"
+            placeholder="seu@email.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
 
-        <input
-          type="password"
-          placeholder="Senha"
-          value={senha}
-          onChange={(e) => setSenha(e.target.value)}
-          className="w-full border p-2 mb-3 rounded"
-        />
+        <div>
+          <label className="block mb-1 text-sm text-gray-600">Senha</label>
+          <input
+            type="password"
+            placeholder="••••••••"
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
 
         <button
           type="submit"
-          className="w-full bg-green-600 text-white p-2 rounded hover:bg-green-700 transition"
+          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition font-medium"
         >
           Cadastrar
         </button>
+
+        <p className="text-center text-sm text-gray-600 mt-4">
+          Já tem uma conta?{' '}
+          <a
+            href="/"
+            className="text-blue-600 hover:underline font-semibold"
+          >
+            Entrar
+          </a>
+        </p>
       </form>
     </div>
   );
