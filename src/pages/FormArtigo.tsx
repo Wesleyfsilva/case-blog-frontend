@@ -6,17 +6,23 @@ export default function FormArtigo() {
   const [titulo, setTitulo] = useState('');
   const [conteudo, setConteudo] = useState('');
   const [imagem, setImagem] = useState<File | null>(null);
+  const [token, setToken] = useState<string | null>(null);
+
   const navigate = useNavigate();
   const { id } = useParams();
-  const token = localStorage.getItem('token');
+
+  // ✅ Pegue o token no useEffect, não fora
+  useEffect(() => {
+    const t = localStorage.getItem('token');
+    if (!t) {
+      navigate('/');
+    } else {
+      setToken(t);
+    }
+  }, [navigate]);
 
   useEffect(() => {
-    if (!token) {
-      navigate('/');
-      return;
-    }
-
-    if (id) {
+    if (token && id) {
       axios
         .get(`http://localhost:3000/api/artigos/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
@@ -29,10 +35,11 @@ export default function FormArtigo() {
           console.error('Erro ao carregar artigo', err);
         });
     }
-  }, [id]);
+  }, [id, token]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!token) return;
 
     const formData = new FormData();
     formData.append('titulo', titulo);
@@ -71,6 +78,8 @@ export default function FormArtigo() {
       console.error(err);
     }
   };
+
+  if (!token) return null; // ✅ Evita renderizar antes de validar
 
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center items-start pt-12 px-4">

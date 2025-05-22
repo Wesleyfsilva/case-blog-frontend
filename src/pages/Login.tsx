@@ -16,9 +16,11 @@ export default function Login() {
         senha,
       });
 
-      const { token, nome } = response.data;
+      const { token, nome, avatar } = response.data;
       localStorage.setItem('token', token);
       localStorage.setItem('nome', nome);
+      localStorage.setItem('avatar', avatar); 
+
 
       navigate('/dashboard');
     } catch (err: any) {

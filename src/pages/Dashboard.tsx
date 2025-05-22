@@ -14,6 +14,7 @@ interface Artigo {
 
 export default function Dashboard() {
   const [artigos, setArtigos] = useState<Artigo[]>([]);
+  const [artigoAberto, setArtigoAberto] = useState<number | null>(null);
   const navigate = useNavigate();
 
   const token = localStorage.getItem('token');
@@ -57,6 +58,10 @@ export default function Dashboard() {
   const handleLogout = () => {
     localStorage.clear();
     navigate('/');
+  };
+
+  const toggleConteudo = (id: number) => {
+    setArtigoAberto((prev) => (prev === id ? null : id));
   };
 
   return (
@@ -110,9 +115,21 @@ export default function Dashboard() {
               <p className="text-sm text-gray-500 mb-2">
                 Publicado em {new Date(artigo.criado_em).toLocaleDateString()}
               </p>
-              <p className="text-sm text-gray-700 mb-4 line-clamp-3">
-                {artigo.conteudo.slice(0, 120)}...
+              <p
+                className={`text-sm text-gray-700 mb-2 whitespace-pre-line break-words ${
+                  artigoAberto === artigo.id ? '' : 'line-clamp-3'
+                }`}
+              >
+                {artigoAberto === artigo.id
+                  ? artigo.conteudo
+                  : artigo.conteudo.slice(0, 150) + '...'}
               </p>
+              <button
+                onClick={() => toggleConteudo(artigo.id)}
+                className="text-blue-600 text-sm mb-2 hover:underline self-start"
+              >
+                {artigoAberto === artigo.id ? 'Mostrar menos' : 'Ler mais'}
+              </button>
 
               <div className="flex justify-between mt-auto border-t pt-3 text-sm">
                 <button
