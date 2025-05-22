@@ -1,54 +1,67 @@
-# React + TypeScript + Vite
+# 🖥️ Frontend - Sistema de Estoque
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este é o frontend do Sistema de Estoque, criado com **React + Vite + TypeScript**. Ele consome a API do backend para autenticar usuários, exibir produtos e permitir o gerenciamento completo do estoque com imagens.
 
-Currently, two official plugins are available:
+## 🚀 Tecnologias
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React
+- Vite
+- TypeScript
+- Axios
+- React Router DOM
+- Lucide React (ícones)
+- Tailwind CSS (opcional, se usar estilização)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📂 Estrutura
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+frontend/
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── services/
+│   └── main.tsx
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ⚙️ Como rodar
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### 1. Instale as dependências:
+
+```bash
+npm install
 ```
+
+### 2. Execute o projeto:
+
+```bash
+npm run dev
+```
+
+> Certifique-se de que o backend esteja rodando em `http://localhost:3000` (ou atualize o baseURL no `axios`).
+
+---
+
+## ✅ Funcionalidades
+
+- Registro e login com JWT
+- Upload de foto de perfil no registro
+- Dashboard com saudação personalizada e avatar
+- Cadastro e listagem de produtos com imagem
+- Edição e exclusão de produtos
+- “Ler mais” para produtos com descrição longa
+- Botão de logout
+- Interface responsiva
+
+---
+
+## 🧠 Autor
+
+Desenvolvido por **Wesley Ferreira**
+
+GitHub: [https://github.com/seuusuario](https://github.com/seuusuario)
+
+---
